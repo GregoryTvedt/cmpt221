@@ -23,8 +23,14 @@ def insert_professors():
     """Insert 3 records into the Professors table using SQLAlchemy ORM."""
     session = get_session()
     try:
-        # TODO: create three professor objects
-        # TODO: use the sqlalchemy orm to insert the new records as a list of professor objects
+        # create three professor objects
+        professor1 = Professor(FirstName="Calista", LastName="Phippen", Email="calista.phippen1@marist.edu")
+        professor2 = Professor(FirstName="John", LastName="Smith", Email="john.smith@marist.edu")
+        professor3 = Professor(FirstName="Jane", LastName="Doe", Email="jane.doe@marist.edu")
+        
+        # use the sqlalchemy orm to insert the new records as a list of professor objects
+        session.add_all([professor1, professor2, professor3])
+
         # "save" the changes
         session.commit()
 
@@ -39,10 +45,15 @@ def update_professor():
     """Update one record in the Professors table using SQLAlchemy ORM."""
     session = get_session()
     try:
-        # TODO: get professor to be updated (would ideally be a parameter)
-        # TODO: use the sqlalchemy orm to update 1 record
-        # "save" the changes
-        session.commit()
+        # get professor to be updated (would ideally be a parameter)
+        professor = session.query(Professor).filter(Professor.ProfessorID == 3).one_or_none()
+        # use the sqlalchemy orm to update 1 record
+        if professor:
+            professor.FirstName = "Elizabeth"
+            # "save" the changes
+            session.commit()
+        else:
+            print(f"No professor found with that ID")
     
     except Exception as e:
         session.rollback()
@@ -55,10 +66,17 @@ def delete_professor():
     """Delete one record in the Professors table using SQLAlchemy ORM."""
     session = get_session()
     try:
-        # TODO: get professor to be deleted (would ideally be a parameter)
-        # TODO: use the sqlalchemy orm to delete 1 record
-        # "save" the changes
-        session.commit()
+        # get professor to be deleted (would ideally be a parameter)
+        professor = session.query(Professor).filter(Professor.ProfessorID == 1).one_or_none()
+        # use the sqlalchemy orm to delete 1 record
+        if professor:
+            session.delete(professor)
+            # "save" the changes
+            session.commit()
+        else:
+            print(f"No professor found with that ID")
+
+        
 
     except Exception as e:
         session.rollback()
