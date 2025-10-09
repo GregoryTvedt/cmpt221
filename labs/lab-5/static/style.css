@@ -1,14 +1,57 @@
+  @keyframes funnybackground {
+  0%   {background-color: red;}
+  25%  {background-color: yellow;}
+  50%  {background-color: blue;}
+  100% {background-color: green;}
+}
+
 body {
-    background-color: lightblue;
+    background-color: red;
+    animation-name: funnybackground;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
   }
   
   h1 {
-    color: blueviolet;
-    text-align: center;
+    color: #0000FF;
+    text-align: right;
+  }
+
+  h2 {
+    color: #0000FF;
+    text-align: left;
+  }
+  h3{
+    position: absolute;
+    bottom: 0;
+    width: 95%;
+    text-align:center;
   }
   
   p {
     font-family: verdana;
-    font-size: 20px;
+    font-size: 7px;
     text-align: center;
   }
+
+  button {
+    background-color:#0000FF;
+    color: red;
+  }
+
+  img {
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    width:100%;
+    height:80px;
+  }
+
+  #jumpgif {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%
+  }
+  

@@ -38,10 +38,17 @@ def create_app():
     @app.route('/')
     def index():
         """Home page"""
-        return render_template('index.html')
-    
+        return render_template('homepage.html')
     # add more routes here!
-
+    @app.route('/jumpscare')
+    def jumpscare():
+        """Jumpscare page"""
+        return render_template('jumpscare.html')
+    
+    @app.route('/pointless')
+    def pointless():
+        """Pointless Page"""
+        return render_template('pointless.html')
     return app
 
 if __name__ == "__main__":
