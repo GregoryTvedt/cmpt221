@@ -2,8 +2,8 @@
 
 import os
 from dotenv import load_dotenv
-from flask import Flask, render_template
-from db.query import get_all
+from flask import Flask, render_template, request, redirect, url_for
+from db.query import get_all, get_one, insert
 from db.server import init_database
 from db.schema import Users
 
@@ -42,18 +42,44 @@ def create_app():
         """Home page"""
         return render_template('index.html')
     
-    @app.route('/signup')
+    @app.route('/signup',  methods=['GET', 'POST'])
     def signup():
         """Sign up page: enables users to sign up"""
-        #TODO: implement sign up logic here
+        #TODO: implement sign up logic here 
+        if request.method == 'POST':
+            try:
+                user = Users(FirstName=request.form["FirstName"],
+                            LastName=request.form["LastName"],
+                            Email=request.form["Email"],
+                            PhoneNumber=request.form["PhoneNumber"],
+                            Password=request.form["Password"])
+                
+                insert(user)
+
+            except Exception as e:
+                print("Error inserting User", e)
+                return redirect('/signup')
 
         return render_template('signup.html')
     
-    @app.route('/login')
+    @app.route('/login', methods=['GET', 'POST'])
     def login():
         """Log in page: enables users to log in"""
         # TODO: implement login logic here
+        if request.method == 'POST':
+            try:
+                user = get_one(Users, Email=request.form["Email"], Password=request.form["Password"])
 
+                if user:
+                    return redirect(url_for('success'))
+                else:
+                    print("No user exists with that email or password")
+                    return redirect('/login')
+                
+            except Exception as e:
+                print("Error finding User", e)
+                return redirect('/login')
+            
         return render_template('login.html')
 
     @app.route('/users')
