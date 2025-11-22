@@ -2,7 +2,7 @@
 
 Resources
 =========
-This section describes classes and functions private to <application-name>. It is intended to document how the application works
+This section describes classes and functions private to CMPT221. It is intended to document how the application works
 
 labs.lab-1
 ----------
